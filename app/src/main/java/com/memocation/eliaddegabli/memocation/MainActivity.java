@@ -1,13 +1,17 @@
 package com.memocation.eliaddegabli.memocation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -23,16 +27,24 @@ import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 public class MainActivity extends AppCompatActivity  implements GoogleApiClient.OnConnectionFailedListener {
 
+
     private GoogleApiClient mGoogleApiClient;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     EditText ed;
     Place place;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+
+
         mGoogleApiClient = new GoogleApiClient
                 .Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -62,6 +74,20 @@ public class MainActivity extends AppCompatActivity  implements GoogleApiClient.
     }
 
 
+    public void onClickMemoList(View v) {
+        if (v.getId() == R.id.myList_Btn) {
+            Intent i = new Intent(MainActivity.this,memoList.class);
+            startActivity(i);
+        }
+    }
+
+    public void onClickHistory(View v) {
+        if (v.getId() == R.id.HistorySearch_btn) {
+            Intent i = new Intent(MainActivity.this,HistoryList.class);
+            startActivity(i);
+        }
+
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
